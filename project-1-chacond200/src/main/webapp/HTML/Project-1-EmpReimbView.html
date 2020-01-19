@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title>Employee Reimbursement View</title>
+</head>
+
+<body>
+  <style>
+    body {
+      background-color: rgb(73, 0, 0);
+    }
+
+    .table {
+      color: rgb(255, 255, 255);
+    }
+
+    .container {
+      color: rgb(255, 255, 255);
+    }
+
+    .table {
+      text-align: center
+    }
+  </style>
+  <div class="container">
+    <h2>Reimbursements</h2>
+    <p>Please contact HR for any further inquiries regarding reimbursements</p>
+    <div class="table-responsive">
+      <table class="table" id="ReimbursementTableHead">
+        <thead>
+          <tr>
+            <th>Reimbursement(ID)</th>
+            <th>Amount(USD)</th>
+            <th>Type(ID)</th>
+            <th>Description</th>
+            <th>Receipt</th>
+            <th>Submission(Time)</th>
+            <th>Approval(Time)</th>
+            <th>Status(ID)</th>
+            <th>Resolver(ID)</th>
+          </tr>
+        </thead>
+        <tbody id="ReimbursementTableBody">
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <form action=http://localhost:8080/project-1/HTML/Project-1-EmpSubmissionForm.html> <button
+      style="background-color: white; color:rgb(73, 0, 0)" value="New Reimbursement"
+      class=" btn btn-secondary btn-lg btn-block">Submit new reimbursement</button>
+    </form>
+  </div>
+
+</body>
+
+<script>
+ 
+	function tryDisplay() {
+		  
+		   let xhr = new XMLHttpRequest();
+		   xhr.onreadystatechange = function() {
+			   if((this.readyState === 4) && (this.status === 200)) {
+				   sessionStorage.setItem('reimbursement_list', this.responseText);
+           //you send a get request and send the response name to 'reimbursemenet_list'
+			   }
+			   if(this.readyState === 4 && this.status === 204) {
+				   alert("Failed to succesfully display reimbursement");
+			   }
+		   };
+   
+		   xhr.open("GET", "http://localhost:8080/project-1/display");
+		   xhr.send();
+		   
+	   }
+	
+	</script>
+
+<script>
+  let reimbursementTableBody = document.getElementById('ReimbursementTableBody');
+  console.log(reimbursementTableBody)
+  let userString = sessionStorage.getItem('currentUser');
+  console.log(userString);
+  let userObject = JSON.parse(userString);
+  if (userObject === null) {
+    window.location = "http://localhost:8080/project-1/";
+    } else {
+      //let reimbursementString = sessionStorage.getItem('reimbursement_list');
+      //let reimbursement_list = JSON.parse(reimbursementString);
+      //console.log(reimbursement_list);
+      let reimbursement_list = userObject.reimbursements;
+      console.log(reimbursement_list);
+      for (reimb in reimbursement_list) {
+        var row = document.createElement('tr');
+        row.innerHTML = '<td>' + reimbursement_list[reimb].reimb_ID + '</td>' +
+          '<td>' + reimbursement_list[reimb].amount + '</td>' +
+          //follows the reimbursement convention
+          '<td>' + reimbursement_list[reimb].type_ID + '</td>' +
+          '<td>' + reimbursement_list[reimb].description + '</td>' +
+          '<td>' + reimbursement_list[reimb].receipt + '</td>' +
+          '<td>' + reimbursement_list[reimb].submissionDate + '</td>' +
+          '<td>' + reimbursement_list[reimb].resolvedDate + '</td>' +
+          '<td>' + reimbursement_list[reimb].status_ID + '</td>' +
+          '<td>' + reimbursement_list[reimb].resolver + '</td>' ;
+                    
+        reimbursementTableBody.appendChild(row);
+      };
+  }
+</script>
+
+</html>

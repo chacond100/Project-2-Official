@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xmlns="http://java.sun.com/xml/ns/javaee" 
+			xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+			version="2.5">
+  <display-name>project-1-chacond100</display-name>
+  
+  <welcome-file-list>
+    <welcome-file>Project_1_Login.html</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<servlet-class>com.revature.web.LoginServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ReimbursementServlet</servlet-name>
+  	<servlet-class>com.revature.web.ReimbursementServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>ReimbursementServlet</servlet-name>
+  	<url-pattern>/reimbursement</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>NewUserServlet</servlet-name>
+  	<servlet-class>com.revature.web.NewUserServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>NewUserServlet</servlet-name>
+  	<url-pattern>/newUser</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>  
+        <servlet-name>DisplayServlet</servlet-name>  
+        <servlet-class>com.revature.web.DisplayServlet</servlet-class>  
+    </servlet>  
+  
+    <servlet-mapping>  
+        <servlet-name>DisplayServlet</servlet-name>  
+        <url-pattern>/display</url-pattern>  
+    </servlet-mapping> 
+    
+    <servlet>  
+        <servlet-name>StatusServlet</servlet-name>  
+        <servlet-class>com.revature.web.StatusServlet</servlet-class>  
+    </servlet>  
+  
+    <servlet-mapping>  
+        <servlet-name>StatusServlet</servlet-name>  
+        <url-pattern>/statusUpdate</url-pattern>  
+    </servlet-mapping> 
+    
+    <servlet>  
+        <servlet-name>DisplayAllServlet</servlet-name>  
+        <servlet-class>com.revature.web.DisplayAllServlet</servlet-class>  
+    </servlet>  
+  
+    <servlet-mapping>  
+        <servlet-name>DisplayAllServlet</servlet-name>  
+        <url-pattern>/displayAll</url-pattern>  
+    </servlet-mapping> 
+    
+</web-app>
